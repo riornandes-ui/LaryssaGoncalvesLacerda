@@ -274,7 +274,8 @@ input[type=checkbox]{
   const result = document.getElementById('result');
 
   let state = 0;
-  
+
+  // 🔥 Função que ajusta a altura do card conforme o maior poema
   function adjustBookHeight(){
     requestAnimationFrame(()=>{
       const frontHeight = front.scrollHeight;
@@ -288,7 +289,10 @@ input[type=checkbox]{
     });
   }
 
+  // Ajuste inicial após fontes carregarem
   document.fonts.ready.then(adjustBookHeight);
+
+  // Reajusta em resize
   window.addEventListener('resize', adjustBookHeight);
 
   leaf.addEventListener('click', (e)=>{
@@ -319,14 +323,14 @@ input[type=checkbox]{
   submitBtn.addEventListener('click', ()=>{
     if(yes.checked){
       result.textContent = 'Te amo ❤️';
-      result.style.color = '#2a7f5b';
+      result.style.color = '#c03a3a';
       createHearts();
     } else if(no.checked){
       result.textContent = 'Te amo mesmo assim ❤️';
       result.style.color = '#c03a3a';
     } else {
       result.textContent = 'Te amo, mas tem que responder, mulé >:(.';
-      result.style.color = '#444';
+      result.style.color = '#c03a3a';
       return;
     }
     setTimeout(()=>{ hideQuestionAndReset(); }, 4000);
