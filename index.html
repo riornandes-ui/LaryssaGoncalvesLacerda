@@ -51,7 +51,7 @@
 
   .leaf.flipped{transform:rotateY(-180deg)}
 
-  .face{
+  .face {
     position:absolute;
     inset:0;
     background:var(--paper);
@@ -61,7 +61,7 @@
     -webkit-backface-visibility:hidden;
     backface-visibility:hidden;
     display:flex;
-    flex-direction:column
+    flex-direction:column;
   }
 
   .face.front{z-index:2}
@@ -80,16 +80,19 @@
     margin-bottom:12px
   }
   
-  .poem{
+  .poem {
     font-family:'Playfair Display',serif;
     font-size:16px;
     line-height:1.45;
     color:#222;
     white-space:pre-wrap;
     padding-right:6px;
-    overflow-y:auto;
     flex:1;
+    overflow-y:auto;
     -webkit-overflow-scrolling:touch;
+    position:relative;
+    transform:translateZ(0); /* força camada própria, libera scroll no mobile */
+    will-change:transform;
   }
 
   .footer{
