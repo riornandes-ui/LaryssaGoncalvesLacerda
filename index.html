@@ -14,8 +14,12 @@
     background:linear-gradient(180deg,#fdebd9 0%,#f6efe9 60%);
     font-family:Inter,system-ui,Arial;
     color:var(--text);
-    overflow:hidden;
-    touch-action: pan-y; /* permite scroll interno no mobile */
+
+    /* 🔥 Alteração para liberar scroll */
+    overflow-x:hidden;
+    overflow-y:auto;
+
+    touch-action: pan-y;
   }
 
   .wrap{
@@ -95,8 +99,6 @@
     max-height:calc(100% - 40px);
     padding-right:10px;
   }
-
-  /* =========================== */
 
   .footer{
     font-size:12px;
