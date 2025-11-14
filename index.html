@@ -14,11 +14,8 @@
     background:linear-gradient(180deg,#fdebd9 0%,#f6efe9 60%);
     font-family:Inter,system-ui,Arial;
     color:var(--text);
-
-    /* 🔥 Alteração para liberar scroll */
     overflow-x:hidden;
     overflow-y:auto;
-
     touch-action: pan-y;
   }
 
@@ -91,7 +88,7 @@
     overflow-y:auto;
     -webkit-overflow-scrolling:touch;
     position:relative;
-    transform:translateZ(0); /* força camada própria, libera scroll no mobile */
+    transform:translateZ(0);
     will-change:transform;
   }
 
