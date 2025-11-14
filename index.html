@@ -59,6 +59,7 @@
     backface-visibility:hidden;
     display:flex;
     flex-direction:column;
+    overflow:hidden;
   }
 
   .face.front{z-index:2}
@@ -78,18 +79,18 @@
   }
   
   .poem {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    transform: translateZ(0);
+    will-change: transform;
     font-family:'Playfair Display',serif;
     font-size:16px;
     line-height:1.45;
     color:#222;
     white-space:pre-wrap;
     padding-right:6px;
-    flex:1;
-    overflow-y:auto;
-    -webkit-overflow-scrolling:touch;
-    position:relative;
-    transform:translateZ(0);
-    will-change:transform;
   }
 
   .footer{
