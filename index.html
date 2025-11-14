@@ -158,6 +158,19 @@
     color:white;
     font-weight:600
   }
+  .btn-turn {
+  background:none;
+  border:none;
+  color:#aaa;
+  font-size:12px;
+  cursor:pointer;
+  text-decoration:underline;
+  padding:0;
+}
+
+.btn-turn:hover {
+  color:var(--accent);
+}
 
   .hint-toast{
     position:fixed;
@@ -209,15 +222,18 @@
       <div class="leaf" id="leaf">
         <div class="face front">
           <div class="poem" id="poemHer"></div>
-          <div class="footer">Toque na página para virar →</div>
-        </div>
+            <div class="footer">
+              <button class="btn-turn" id="btnFlip">Virar página →</button>
+            </div>
+          </div>
         <div class="face back">
           <h3 class="title">Para ela</h3>
-          <div class="author">Meu poema</div>
-          <div class="poem" id="poemMe"></div>
-          <div class="footer">Toque para finalizar</div>
+            <div class="author">Meu poema</div>
+              <div class="poem" id="poemMe"></div>
+                <div class="footer">
+            <button class="btn-turn" id="btnFinish">Finalizar</button>
+          </div>
         </div>
-      </div>
     </div>
   </div>
 
@@ -251,6 +267,8 @@
     const no = document.getElementById('no');
     const submitBtn = document.getElementById('submitBtn');
     const result = document.getElementById('result');
+    const btnFlip = document.getElementById('btnFlip');
+    const btnFinish = document.getElementById('btnFinish');
 
     let state = 0;
     let toastTimer = null;
@@ -261,15 +279,18 @@
       toastTimer = setTimeout(()=>{ toast.classList.remove('show'); }, 1500);
     }
 
-    leaf.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      if(state === 0){
-        leaf.classList.add('flipped');
-        state = 1;
-        setTimeout(showToast, 260);
-      } else if(state === 1){
-        overlay.classList.add('show');
-        state = 2;
+    btnFlip.addEventListener('click', ()=>{
+    if(state === 0){
+    leaf.classList.add('flipped');
+    state = 1;
+    setTimeout(showToast, 260);
+      }
+    });
+
+    btnFinish.addEventListener('click', ()=>{
+    if(state === 1){
+    overlay.classList.add('show');
+    state = 2;
       }
     });
 
