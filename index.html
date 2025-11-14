@@ -58,7 +58,6 @@
     border-radius:10px;
     padding:28px;
     box-sizing:border-box;
-    overflow-y:auto; /* 🔥 permite o poema rolar */
     -webkit-backface-visibility:hidden;
     backface-visibility:hidden;
     display:flex;
@@ -88,15 +87,9 @@
     color:#222;
     white-space:pre-wrap;
     padding-right:6px;
-    overflow:auto;
-  }
-
-  /* scroll do texto da página de trás */
-  .face.back .poem{
     overflow-y:auto;
+    flex:1;
     -webkit-overflow-scrolling:touch;
-    position:relative;
-    padding-right:10px;
   }
 
   .footer{
