@@ -14,12 +14,11 @@
 }
 
 html,body{
-  height:100%;
+  height:auto; 
   margin:0;
   background:linear-gradient(180deg,#fdebd9 0%,#f6efe9 60%);
   font-family:Inter,system-ui,Arial;
   color:var(--text);
-  overflow:hidden;
 }
 
 .wrap{
@@ -33,8 +32,8 @@ html,body{
 .book{
   width:92vw;
   max-width:360px;
-  height:68vh;
-  max-height:560px;
+  height:auto;
+  max-height:none;
   perspective:1200px;
   position:relative;
   overflow:visible;
@@ -43,11 +42,11 @@ html,body{
 .leaf{
   width:100%;
   height:100%;
+  position:relative;
   transform-style:preserve-3d;
   transition:transform 700ms cubic-bezier(.2,.9,.3,1);
   box-shadow:0 20px 50px rgba(0,0,0,.16);
   border-radius:10px;
-  overflow:visible;
 }
 
 .leaf.flipped{ transform:rotateY(-180deg); }
@@ -58,11 +57,11 @@ html,body{
   background:var(--paper);
   border-radius:10px;
   box-sizing:border-box;
-  padding:28px;
   -webkit-backface-visibility:hidden;
   backface-visibility:hidden;
   display:flex;
   flex-direction:column;
+  padding:28px;
   overflow:visible;
 }
 
@@ -86,19 +85,20 @@ html,body{
   font-family:'Playfair Display',serif;
   font-size:16px;
   line-height:1.45;
+  color:#222;
   white-space:pre-wrap;
   padding-right:8px;
-  flex:1;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
-  touch-action:pan-y;
+  overflow:visible;
+  -webkit-overflow-scrolling:auto;
+  touch-action:auto;
+  overscroll-behavior:auto;
 }
-
 .footer{
   margin-top:12px;
   text-align:right;
   font-size:12px;
   color:#aaa;
+  display: none;
 }
 
 .btn-turn{
@@ -195,6 +195,11 @@ input[type=checkbox]{
   animation:floatUp 4s linear forwards;
   opacity:0.8;
 }
+
+#poemHer{
+  margin-bottom: 50px;
+
+}
 @keyframes floatUp{
   0%{ transform:translateY(0) scale(1) rotate(0deg); opacity:1; }
   100%{ transform:translateY(-110vh) scale(1.8) rotate(360deg); opacity:0; }
@@ -223,18 +228,15 @@ input[type=checkbox]{
       <div class="leaf" id="leaf">
         <div class="face front">
           <div class="poem" id="poemHer"></div>
-            <div class="footer">
-              <button class="btn-turn" id="btnFlip">Virar página →</button>
-            </div>
-          </div>
+          <div class="footer">Toque na página para virar →</div>
+        </div>
         <div class="face back">
           <h3 class="title">Para ela</h3>
-            <div class="author">Meu poema</div>
-              <div class="poem" id="poemMe"></div>
-                <div class="footer">
-            <button class="btn-turn" id="btnFinish">Finalizar</button>
-          </div>
+          <div class="author">Meu poema</div>
+          <div class="poem" id="poemMe"></div>
+          <div class="footer">Toque para finalizar</div>
         </div>
+      </div>
     </div>
   </div>
 
@@ -253,90 +255,95 @@ input[type=checkbox]{
 
   <div class="hint-toast" id="toast">Toque para finalizar</div>
 
-  <script>
-    const poemHer = `Dizem que os olhos não mentem… Os meus, porém, já se perderam nos seus.\n\nHá algo de divino em ti - uma presença que me atravessa, como se os deuses tivessem escolhido tua voz para me chamar de volta à existência.\n\nCada parte do meu corpo se curva à lembrança do teu toque.\nTeu gosto ainda repousa em minha língua, como se o próprio destino tivesse selado meu nome no teu.\n\nTu foste a tempestade e a calma - o caos que trouxe minha paz.\n\nEu ergueria um altar em tua honra,\nverteria meu sangue como oferenda, até que nada restasse de mim além do eco do teu nome.\n\nDeixaria que me tomasses até o amanhecer, até que teu ser se misturasse ao meu, até que eu me tornasse tua prece e teu pecado.\n\nPreferia a solidão e agora só sob a ausência do teu olhar estou prestes a colapsar.\n\nRezo em silêncio, para que os deuses me concedam um último instante em teus braços. Mesmo que seja para morrer neles.`;
+<script>
+  const poemHer = `Dizem que os olhos não mentem… Os meus, porém, já se perderam nos seus.\n\nHá algo de divino em ti - uma presença que me atravessa, como se os deuses tivessem escolhido tua voz para me chamar de volta à existência.\n\nCada parte do meu corpo se curva à lembrança do teu toque.\nTeu gosto ainda repousa em minha língua, como se o próprio destino tivesse selado meu nome no teu.\n\nTu foste a tempestade e a calma - o caos que trouxe minha paz.\n\nEu ergueria um altar em tua honra,\nverteria meu sangue como oferenda, até que nada restasse de mim além do eco do teu nome.\n\nDeixaria que me tomasses até o amanhecer, até que teu ser se misturasse ao meu, até que eu me tornasse tua prece e teu pecado.\n\nPreferia a solidão e agora só sob a ausência do teu olhar estou prestes a colapsar.\n\nRezo em silêncio, para que os deuses me concedam um último instante em teus braços. Mesmo que seja para morrer neles.`;
 
-    const poemMe = `Dizia que me perdia em mentiras, mas não consigo disfarçar meu olhar apaixonado por ti.\n\nExiste algo tão sublime entre nós - uma flecha certeira de um cupido, um plano escrito à mão por Deus.\n\nTudo o que eu faço me remete ao passado, lembranças de momentos tão bons e imagens do que não vivemos.\n\nComo sentir saudade de alguém que ainda não conheci? E, no entanto, tuas promessas me acalmam.\nInesperadamente, foste quem me trouxe paz.\n\nFaria com que tuas oferendas nunca fossem em vão, eternizaria teu nome em minha pele, em gratidão.\n\nCuidarei de você até o anoitecer, até que nos tornassemos um só, até que eu me tornasse tua cura e teu abrigo.\n\nComo tu, romantizava a solidão, agora cada dia sem ti é um pequeno pecado.\n\nRogo aos céus em voz alta, escutem meu agradecimento e concedam-me o presente de ter-te em meus braços.`;
+  const poemMe = `Dizia que me perdia em mentiras, mas não consigo disfarçar meu olhar apaixonado por ti.\n\nExiste algo tão sublime entre nós - uma flecha certeira de um cupido, um plano escrito à mão por Deus.\n\nTudo o que eu faço me remete ao passado, lembranças de momentos tão bons e imagens do que não vivemos.\n\nComo sentir saudade de alguém que ainda não conheci? E, no entanto, tuas promessas me acalmam.\nInesperadamente, foste quem me trouxe paz.\n\nFaria com que tuas oferendas nunca fossem em vão, eternizaria teu nome em minha pele, em gratidão.\n\nCuidarei de você até o anoitecer, até que nos tornassemos um só, até que eu me tornasse tua cura e teu abrigo.\n\nComo tu, romantizava a solidão, agora cada dia sem ti é um pequeno pecado.\n\nRogo aos céus em voz alta, escutem meu agradecimento e concedam-me o presente de ter-te em meus braços.`;
 
-    document.getElementById('poemHer').textContent = poemHer;
-    document.getElementById('poemMe').textContent = poemMe;
+  document.getElementById('poemHer').textContent = poemHer;
+  document.getElementById('poemMe').textContent = poemMe;
 
-    const leaf = document.getElementById('leaf');
-    const overlay = document.getElementById('overlay');
-    const toast = document.getElementById('toast');
-    const yes = document.getElementById('yes');
-    const no = document.getElementById('no');
-    const submitBtn = document.getElementById('submitBtn');
-    const result = document.getElementById('result');
-    const btnFlip = document.getElementById('btnFlip');
-    const btnFinish = document.getElementById('btnFinish');
+  const book   = document.getElementById('book');
+  const leaf   = document.getElementById('leaf');
+  const front  = leaf.querySelector('.face.front');
+  const back   = leaf.querySelector('.face.back');
+  const overlay = document.getElementById('overlay');
+  const yes = document.getElementById('yes');
+  const no = document.getElementById('no');
+  const submitBtn = document.getElementById('submitBtn');
+  const result = document.getElementById('result');
 
-    let state = 0;
-    let toastTimer = null;
+  let state = 0;
+  
+  function adjustBookHeight(){
+    requestAnimationFrame(()=>{
+      const frontHeight = front.scrollHeight;
+      const backHeight  = back.scrollHeight;
+      const maxHeight   = Math.max(frontHeight, backHeight);
 
-    function showToast(){
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(()=>{ toast.classList.remove('show'); }, 1500);
-    }
+      book.style.height = maxHeight + 'px';
+      leaf.style.height = maxHeight + 'px';
+      front.style.height = '100%';
+      back.style.height  = '100%';
+    });
+  }
 
-    btnFlip.addEventListener('click', ()=>{
+  document.fonts.ready.then(adjustBookHeight);
+  window.addEventListener('resize', adjustBookHeight);
+
+  leaf.addEventListener('click', (e)=>{
+    e.stopPropagation();
     if(state === 0){
-    leaf.classList.add('flipped');
-    state = 1;
-    setTimeout(showToast, 260);
-      }
-    });
-
-    btnFinish.addEventListener('click', ()=>{
-    if(state === 1){
-    overlay.classList.add('show');
-    state = 2;
-      }
-    });
-
-    overlay.addEventListener('click', (e)=>{
-      if(e.target === overlay){ hideQuestionAndReset(); }
-    });
-
-    function hideQuestionAndReset(){
-      overlay.classList.remove('show');
-      result.textContent=''; yes.checked=false; no.checked=false;
-      leaf.classList.remove('flipped');
-      state = 0;
+      leaf.classList.add('flipped');
+      state = 1;
+    } else if(state === 1){
+      overlay.classList.add('show');
+      state = 2;
     }
+  });
 
-    yes.addEventListener('change', ()=>{ if(yes.checked) no.checked=false; });
-    no.addEventListener('change', ()=>{ if(no.checked) yes.checked=false; });
+  overlay.addEventListener('click', (e)=>{
+    if(e.target === overlay){ hideQuestionAndReset(); }
+  });
 
-    submitBtn.addEventListener('click', ()=>{
-      if(yes.checked){
-        result.textContent = 'Te amo ❤️';
-        result.style.color = '#2a7f5b';
-        createHearts();
-      } else if(no.checked){
-        result.textContent = 'Te amo mesmo assim ❤️';
-        result.style.color = '#c03a3a';
-      } else {
-        result.textContent = 'Te amo, mas tem que responder, mulé >:(.';
-        result.style.color = '#444';
-        return;
-      }
-      setTimeout(()=>{ hideQuestionAndReset(); }, 4000);
-    });
+  function hideQuestionAndReset(){
+    overlay.classList.remove('show');
+    result.textContent=''; yes.checked=false; no.checked=false;
+    leaf.classList.remove('flipped');
+    state = 0;
+  }
 
-    function createHearts(){
-      for(let i=0;i<25;i++){
-        const heart=document.createElement('div');
-        heart.classList.add('heart');
-        heart.textContent='❤';
-        heart.style.left=Math.random()*100+'vw';
-        heart.style.fontSize=(16+Math.random()*20)+'px';
-        heart.style.animationDuration=(3+Math.random()*2)+'s';
-        document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(),5000);
-      }
+  yes.addEventListener('change', ()=>{ if(yes.checked) no.checked=false; });
+  no.addEventListener('change', ()=>{ if(no.checked) yes.checked=false; });
+
+  submitBtn.addEventListener('click', ()=>{
+    if(yes.checked){
+      result.textContent = 'Te amo ❤️';
+      result.style.color = '#2a7f5b';
+      createHearts();
+    } else if(no.checked){
+      result.textContent = 'Te amo mesmo assim ❤️';
+      result.style.color = '#c03a3a';
+    } else {
+      result.textContent = 'Te amo, mas tem que responder, mulé >:(.';
+      result.style.color = '#444';
+      return;
     }
-  </script>
+    setTimeout(()=>{ hideQuestionAndReset(); }, 4000);
+  });
+
+  function createHearts(){
+    for(let i=0;i<25;i++){
+      const heart=document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent='❤';
+      heart.style.left=Math.random()*100+'vw';
+      heart.style.fontSize=(16+Math.random()*20)+'px';
+      heart.style.animationDuration=(3+Math.random()*2)+'s';
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(),5000);
+    }
+  }
+</script>
 </body>
 </html>
